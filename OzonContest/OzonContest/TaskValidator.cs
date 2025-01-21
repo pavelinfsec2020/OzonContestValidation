@@ -1,4 +1,6 @@
-﻿namespace OzonContest
+﻿using System.Diagnostics;
+
+namespace OzonContest
 {
     public class TaskValidator
     {
@@ -44,6 +46,11 @@
 
         private async Task<string> ValidTest(string inputTestFileName, string expectedOutputFileName, string testNumber)
         {
+
+            var allTimeWatcher = new Stopwatch();
+            var algoTimeWatcher = new Stopwatch();
+            allTimeWatcher.Start();
+            
             var inputTestData = new List<string>();
             var expectedOutputData = new List<string>();
 
@@ -65,7 +72,9 @@
                 }
             }
 
+            algoTimeWatcher.Start();
             var actualResult = _validationMethod(inputTestData.ToArray());
+            algoTimeWatcher.Stop();
 
             if (actualResult.Length != expectedOutputData.Count)
                 return $"В тесте {testNumber} не соответствует количество строк ожидаемого и фактического результатов!";
@@ -86,7 +95,11 @@
                 }
             }
 
-            return $"Тест № {testNumber} пройден успешно!";
+            allTimeWatcher.Stop();
+
+            return $"Тест № {testNumber} пройден успешно! + \n" +
+                $"Общее время: {allTimeWatcher.ElapsedMilliseconds} мс \n " +
+                $"Время работы алгоритма: {allTimeWatcher.ElapsedMilliseconds} мс"; 
         }
     }
 }
