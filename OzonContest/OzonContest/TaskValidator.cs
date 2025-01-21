@@ -35,14 +35,14 @@
 
             for (int i = 0; i < _inputTestFiles.Length; i++)
             {
-                var validationResult = ValidTest(_inputTestFiles[i], _outputTestFiles[i], i + 1).Result;
+                var validationResult = ValidTest(_inputTestFiles[i], _outputTestFiles[i], Path.GetFileName(_inputTestFiles[i])).Result;
                 testResults.Add(validationResult);
             }
 
             return testResults;
         }
 
-        private async Task<string> ValidTest(string inputTestFileName, string expectedOutputFileName, int testNumber)
+        private async Task<string> ValidTest(string inputTestFileName, string expectedOutputFileName, string testNumber)
         {
             var inputTestData = new List<string>();
             var expectedOutputData = new List<string>();
