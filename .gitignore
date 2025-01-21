@@ -1,0 +1,7 @@
+﻿################################################################################
+# Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
+################################################################################
+
+/OzonContest/OzonContest/obj
+/OzonContest/OzonContest/bin/Debug/net7.0
+/OzonContest/.vs
